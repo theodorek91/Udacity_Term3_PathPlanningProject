@@ -1,6 +1,28 @@
 # CarND-Path-Planning-Project
 Self-Driving Car Engineer Nanodegree Program
-   
+
+## Reflection
+The path planner presented here succesfully was driven for >20miles. additionally, A log is created when the model is run, that lists when the left and right lane is blocked and provides the distance between our car and the car in the lanes when seen by the planner.
+
+The log of my trial run is shown in the file Run_Log.txt.
+
+The Path Planning Algorithm takes the following Spoken and a few Unspoken rules of driving on teh highway, into consideration.
+
+1) If left lane is available Overtake from the left. 
+2) Although this is not a rule, If there is no left lane available, overtake from the right. 
+3) Once overtake, after moving a safe distance, move back to centre lane.
+4) If car is found ahead, slow down and estimate if you can move back to the centre lane, else try to overtake.
+
+The path planner follows the steps from the udacity Course to convert the coordinates of the car to Frenet coordinate system and then back to the xycoordinate system.
+
+Lines 267 to 298 determines the prescense of a car after the end of the previous path in the same lane ahead of it, the lane to the left (10m behind and 27 m ahead) and in the lane to the right (10 m behind and 27 m ahead). These values of 10 m and 27 m were based on a trial and error scheme to determine the correct distance. 
+
+Also, the look ahead section determines if there is a car 25 m ahead.
+
+Additionally, lines 300 to 339 determines the behavious of the car in one of the available scenarios. If it is overtaking a car, it increases velocity, and then switches lane calculating a spline for proper trajectory.
+
+At all times, it does not exceed the MAX vel of 49.5 .
+
 ### Simulator.
 You can download the Term3 Simulator which contains the Path Planning Project from the [releases tab (https://github.com/udacity/self-driving-car-sim/releases).
 
@@ -81,21 +103,3 @@ A really helpful resource for doing this project and creating smooth trajectorie
 * [uWebSockets](https://github.com/uWebSockets/uWebSockets)
   * Run either `install-mac.sh` or `install-ubuntu.sh`.
  
-#### Reflection
-
-The Path Planning Algorithm takes the following Spoken and a few Unspoken rules of driving on teh highway, into consideration.
-
-1) If left lane is available Overtake from the left. 
-2) Although this is not a rule, If there is no left lane available, overtake from the right. 
-3) Once overtake, after moving a safe distance, move back to centre lane.
-4) If car is found ahead, slow down and estimate if you can move back to the centre lane, else try to overtake.
-
-The path planner follows the steps from the udacity Course to convert the coordinates of the car to Frenet coordinate system and then back to the xycoordinate system.
-
-Lines 267 to 298 determines the prescense of a car after the end of the previous path in the same lane ahead of it, the lane to the left (10m behind and 27 m ahead) and in the lane to the right (10 m behind and 27 m ahead). These values of 10 m and 27 m were based on a trial and error scheme to determine the correct distance. 
-
-Also, the look ahead section determines if there is a car 25 m ahead.
-
-Additionally, lines 300 to 339 determines the behavious of the car in one of the available scenarios. If it is overtaking a car, it increases velocity, and then switches lane calculating a spline for proper trajectory.
-
-At all times, it does not exceed the MAX vel of 49.5 .
